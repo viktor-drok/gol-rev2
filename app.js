@@ -5,8 +5,13 @@ const color = 'cornsilk';
 const rowCount = 40;
 const colCount = 40;
 let cellSize = 0;
-let stepsPerSecond = 5;
+let stepsPerSecond = document.getElementById('speed');
+let chanceForNewNeighbor = document.getElementById('chance');
 const state = buildState();
+const stopBtn = document.querySelector('.stop-start');
+const options = document.querySelector('.options');
+const optionsModal = document.querySelector('.options-modal');
+const closeModalBtn = document.querySelector('.close');
 
 let timerId;
 
@@ -24,22 +29,45 @@ onresize = () => {
     render();
 };
 
-onkeydown = (e) => {
-    if (e.key === ' ') {
-        if (timerId) {
-            stopSimulation();
-        } else {
-            runSimulation();
-        }
-    }
-};
-
 canvas.onclick = e => {
     const { offsetX: x, offsetY: y } = e;
 
     toggleCell(x, y);
     render();
 };
+
+function stopStart(e) {
+    if (e.key === ' ' || e.target == stopBtn) {
+        if (timerId) {
+            stopSimulation();
+        } else {
+            runSimulation();
+        }
+    }
+}
+
+document.addEventListener('click', stopStart);
+document.addEventListener('keydown', stopStart);
+
+// onkeydown = (e) => {
+//     if (e.key === ' ') {
+//         if (timerId) {
+//             stopSimulation();
+//         } else {
+//             runSimulation();
+//         }
+//     }
+// };
+
+// onclick = (e) => {
+//     if (e.target == stopBtn) {
+//         if (timerId) {
+//             stopSimulation();
+//         } else {
+//             runSimulation();
+//         }
+//     }
+// };
 
 function resize() {
     const viewMin = Math.min(innerWidth, innerHeight);
@@ -92,7 +120,7 @@ function runSimulation() {
         proceed();
         render();
         runSimulation();
-    }, 1000 / stepsPerSecond);
+    }, 1000 / (stepsPerSecond.value / 10));
 }
 
 function proceed() {
@@ -129,15 +157,15 @@ function getNeighbourhood(rowIndex, colIndex) {
     return neighbourhood;
 }
 
-function calcNextCellState(neighbourhood) {
-    neighbourhood = neighbourhood.flat();
+function calcNextCellState(neighborhood) {
+    neighborhood = neighborhood.flat();
 
-    const [cellState] = neighbourhood.splice(4, 1);
-    const neighbourCount = neighbourhood.filter(Boolean).length;
+    const [cellState] = neighborhood.splice(4, 1);
+    const neighbourCount = neighborhood.filter(Boolean).length;
 
     return cellState
         ? +(neighbourCount === 2 || neighbourCount === 3)
-        : +(neighbourCount === 3 || neighbourCount === 2 && Math.random() < 0.01);
+        : +(neighbourCount === 3 || neighbourCount === 2 && Math.random() < chanceForNewNeighbor.value / 100);
 }
 // function calcNextCellState(neighbourhood) {
 //     neighbourhood = neighbourhood.flat();
@@ -155,3 +183,10 @@ function stopSimulation() {
     timerId = null;
 }
 
+// work with DOM elements
+
+options.addEventListener('click', showOptionsModal);
+
+function showOptionsModal() {
+    optionsModal.toggleAttribute('data-hidden');
+}
