@@ -12,12 +12,16 @@ const stopBtn = document.querySelector('.stop-start');
 const options = document.querySelector('.options');
 const optionsModal = document.querySelector('.options-modal');
 const closeModalBtn = document.querySelector('.close');
+const buttons = document.querySelectorAll('button');
+const cleaarBtn = document.querySelector('.cleaarBtn');
 
 let timerId;
 
 console.log(state);
 
 document.body.append(canvas);
+
+preventDefaultBtns();
 
 resize();
 render();
@@ -48,6 +52,9 @@ function stopStart(e) {
 
 document.addEventListener('click', stopStart);
 document.addEventListener('keydown', stopStart);
+options.addEventListener('click', showOptionsModal);
+cleaarBtn.addEventListener('click', clearBtn);
+
 
 // onkeydown = (e) => {
 //     if (e.key === ' ') {
@@ -185,8 +192,22 @@ function stopSimulation() {
 
 // work with DOM elements
 
-options.addEventListener('click', showOptionsModal);
-
 function showOptionsModal() {
     optionsModal.toggleAttribute('data-hidden');
 }
+
+function preventDefaultBtns() {
+    buttons.forEach(element => element.addEventListener('click', (e) => e.preventDefault()));
+};
+
+function clearBtn() {
+    stopSimulation();
+    clearCanvas();
+    state.forEach(arr => arr.fill(0));
+    render();
+}
+
+function clearCanvas() {
+    ctx.fillStyle = '#333';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+};

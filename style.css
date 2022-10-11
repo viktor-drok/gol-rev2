@@ -19,10 +19,17 @@ button {
 label {
     display: flex;
     width: 100%;
+    margin-bottom: 20px;
+
 }
 
 input {
     flex-grow: 1;
+    cursor: pointer;
+}
+
+form {
+    text-align: center;
 }
 
 div[data-hidden] {
@@ -55,8 +62,8 @@ div[data-hidden] {
     border: none;
     transform: translateX(-100%);
     /* padding: 20px 30px; */
-    background-color: rgba(51, 51, 51, 0.875);
-    /* background-color: rgba(142, 74, 74, 0.759); */
+    /* background-color: rgba(51, 51, 51, 0.875); */
+    background-color: rgba(142, 74, 74, 0.759);
     width: 300px;
     height: 100vh;
     padding: 100px 10px;
@@ -72,15 +79,27 @@ div[data-hidden] {
     right: 0;
 }
 
+.speed {
+    margin-top: 20px;
+}
+
 .speed svg {
-    transform: scale(0.5);
+    margin-right: 10px;
+    /* transform: scale(0.5); */
+}
+
+.chance {
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.chance img {
+    display: block;
+    margin-right: 10px;
 }
 
 .chance span {
+    width: 100%;
+    text-align: center;
     display: block;
-    width: 100%;
-}
-
-.chance input {
-    width: 100%;
 }
