@@ -28,7 +28,7 @@ button {
     border-radius: 10px;
 }
 
-button:active {
+form > button:active {
     transition: all 0.3s ease;
     transform: scale(0.9);
 }
@@ -52,7 +52,6 @@ form {
 }
 
 form p {
-    display: block;
     width: 100%;
     font-weight: bold;
     margin-top: 20px;
