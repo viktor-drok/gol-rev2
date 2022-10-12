@@ -11,7 +11,9 @@ const state = buildState();
 const stopBtn = document.querySelector('.stop-start');
 const options = document.querySelector('.options');
 const explanation = document.querySelector('.explanation');
+const rules = document.querySelector('.rules');
 const optionsModal = document.querySelector('.options-modal');
+const rulesModal = document.querySelector('.rules-modal');
 const explanationModal = document.querySelector('.explanation-modal');
 // const closeModalBtn = document.querySelector('.close');
 const buttons = document.querySelectorAll('button');
@@ -58,6 +60,7 @@ document.addEventListener('keydown', stopStart);
 document.addEventListener('keydown', replaceStartBtnText);
 options.addEventListener('click', showOptionsModal);
 explanation.addEventListener('click', showExplanationModal);
+rules.addEventListener('click', showRulesModal);
 cleaarBtn.addEventListener('click', clearBtn);
 // closeModalBtn.addEventListener('click', () => {
 //     optionsModal.removeAttribute('data-hidden');
@@ -202,13 +205,19 @@ function stopSimulation() {
 function showOptionsModal() {
     optionsModal.toggleAttribute('data-hidden');
     explanationModal.removeAttribute('data-hidden');
-
+    rulesModal.removeAttribute('data-hidden');
 }
 
 function showExplanationModal() {
     explanationModal.toggleAttribute('data-hidden');
     optionsModal.removeAttribute('data-hidden');
+    rulesModal.removeAttribute('data-hidden');
+}
 
+function showRulesModal() {
+    rulesModal.toggleAttribute('data-hidden');
+    explanationModal.removeAttribute('data-hidden');
+    optionsModal.removeAttribute('data-hidden');
 }
 
 function preventDefaultBtns() {
