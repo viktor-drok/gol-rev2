@@ -21,6 +21,9 @@ const patternModalList = document.querySelector('.pattern-modal-list');
 // const closeModalBtn = document.querySelector('.close');
 const buttons = document.querySelectorAll('button');
 const cleaarBtn = document.querySelector('.cleaarBtn');
+const generation = document.querySelector('.generation');
+const population = document.querySelector('.population');
+let populationCount = [];
 
 const patternsStatic = [
     {
@@ -70,6 +73,10 @@ const patternsOscillators = [
 
 const patternsSpaceships = [
     {
+        name: 'Heavy-weight spaceship',
+        src: '/images/Hwss.gif'
+    },
+    {
         name: 'Glider',
         src: '/images/glider.gif'
     },
@@ -80,10 +87,6 @@ const patternsSpaceships = [
     {
         name: 'Middle-weight spaceship',
         src: '/images/Mwss.gif'
-    },
-    {
-        name: 'Heavy-weight spaceship',
-        src: '/images/Hwss.gif'
     }
 ];
 
@@ -101,6 +104,7 @@ resize();
 render();
 
 runSimulation();
+
 
 onresize = () => {
     resize();
@@ -207,6 +211,8 @@ function runSimulation() {
     timerId = setTimeout(() => {
         proceed();
         render();
+        showGeneration(timerId);
+        showPopulation(state);
         runSimulation();
     }, 1000 / (stepsPerSecond.value / 10));
 }
@@ -340,3 +346,12 @@ function renderPatterns() {
     });
 }
 
+function showGeneration(timerId) {
+    generation.innerText = `Generation: ${timerId}`;
+}
+
+function showPopulation(state) {
+    populationCount = state.flat().reduce((a, b) => a + b);
+
+    population.innerText = `Population: ${populationCount}`;
+}

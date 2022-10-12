@@ -1,4 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Urbanist:500,700);
+
 body {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 16px;
     display: flex;
     height: 100vh;
     background-color: #000;
@@ -13,7 +17,20 @@ canvas {
 }
 
 button {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+button:active {
+    transition: all 0.3s ease;
+    transform: scale(0.9);
 }
 
 label {
@@ -29,7 +46,21 @@ input {
 }
 
 form {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form p {
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+form > button > i {
+    font-size: 20px;
+    color: rgb(34, 61, 238);
 }
 
 div[data-hidden] {
@@ -40,6 +71,10 @@ div[data-hidden] {
 
 li {
     margin-left: 30px;
+}
+
+a {
+    color: rgb(31, 31, 241);
 }
 
 .options,
@@ -76,6 +111,7 @@ li {
 .options:hover,
 .pattern:hover,
 .rules:hover {
+    font-size: 20px;
     background-color: cornsilk;
     width: 16%;
 }
@@ -96,7 +132,7 @@ li {
     transform: translateX(-100%);
     /* padding: 20px 30px; */
     /* background-color: rgba(51, 51, 51, 0.875); */
-    background-color: rgba(142, 74, 74, 0.759);
+    background-color: rgba(225, 196, 196, 0.91);
     width: 300px;
     height: 100vh;
     padding: 100px 20px;
