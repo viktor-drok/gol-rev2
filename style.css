@@ -42,12 +42,21 @@ div[data-hidden] {
     position: absolute;
     border: none;
     top: 10vh;
+    width: 6%;
+    height: 4vh;
     /* left: calc((100vw - 100vh) / 2 + 100vh); */
     left: calc(50vw + 50vh);
     z-index: 5;
 
     padding: 5px 10px;
     border-radius: 0 10px 10px 0;
+    transition: all 0.5s ease;
+}
+
+.options:hover {
+    /* transition: all 0s; */
+    background-color: cornsilk;
+    width: 10%;
 }
 
 .options-modal {

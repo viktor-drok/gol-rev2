@@ -50,11 +50,15 @@ function stopStart(e) {
     }
 }
 
-document.addEventListener('click', stopStart);
+stopBtn.addEventListener('click', stopStart);
+stopBtn.addEventListener('click', replaceStartBtnText);
 document.addEventListener('keydown', stopStart);
+document.addEventListener('keydown', replaceStartBtnText);
 options.addEventListener('click', showOptionsModal);
 cleaarBtn.addEventListener('click', clearBtn);
-
+closeModalBtn.addEventListener('click', () => {
+    optionsModal.removeAttribute('data-hidden');
+});
 
 // onkeydown = (e) => {
 //     if (e.key === ' ') {
@@ -210,4 +214,12 @@ function clearBtn() {
 function clearCanvas() {
     ctx.fillStyle = '#333';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    replaceStartBtnText();
 };
+
+function replaceStartBtnText() {
+    stopBtn.innerHTML = (stopBtn.innerHTML == '<i class="fa-solid fa-pause"></i>Pause')
+        ? (stopBtn.innerHTML = '<i class="fa-solid fa-play"></i>Play')
+        : (stopBtn.innerHTML = '<i class="fa-solid fa-pause"></i>Pause');
+}
