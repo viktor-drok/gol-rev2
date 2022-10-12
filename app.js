@@ -10,8 +10,10 @@ let chanceForNewNeighbor = document.getElementById('chance');
 const state = buildState();
 const stopBtn = document.querySelector('.stop-start');
 const options = document.querySelector('.options');
+const explanation = document.querySelector('.explanation');
 const optionsModal = document.querySelector('.options-modal');
-const closeModalBtn = document.querySelector('.close');
+const explanationModal = document.querySelector('.explanation-modal');
+// const closeModalBtn = document.querySelector('.close');
 const buttons = document.querySelectorAll('button');
 const cleaarBtn = document.querySelector('.cleaarBtn');
 
@@ -55,10 +57,11 @@ stopBtn.addEventListener('click', replaceStartBtnText);
 document.addEventListener('keydown', stopStart);
 document.addEventListener('keydown', replaceStartBtnText);
 options.addEventListener('click', showOptionsModal);
+explanation.addEventListener('click', showExplanationModal);
 cleaarBtn.addEventListener('click', clearBtn);
-closeModalBtn.addEventListener('click', () => {
-    optionsModal.removeAttribute('data-hidden');
-});
+// closeModalBtn.addEventListener('click', () => {
+//     optionsModal.removeAttribute('data-hidden');
+// });
 
 // onkeydown = (e) => {
 //     if (e.key === ' ') {
@@ -198,6 +201,14 @@ function stopSimulation() {
 
 function showOptionsModal() {
     optionsModal.toggleAttribute('data-hidden');
+    explanationModal.removeAttribute('data-hidden');
+
+}
+
+function showExplanationModal() {
+    explanationModal.toggleAttribute('data-hidden');
+    optionsModal.removeAttribute('data-hidden');
+
 }
 
 function preventDefaultBtns() {

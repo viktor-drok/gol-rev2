@@ -16,10 +16,25 @@
 
 <body>
 
-    <button class="options" data-pressed>Options</button>
+    <button class="options">Options</button>
+
+    <button class="explanation"><i class="fa-solid fa-circle-info"></i>Game Explanation</button>
+
+    <div class="explanation-modal">
+        <!-- <button class="close"><i class="fa-solid fa-xmark fa-2xl"></i></button> -->
+
+        <h2>Game of Life Explanation</h2>
+        <p>The Game of Life is not your typical computer game. It is a cellular automaton, and was invented by Cambridge
+            mathematician John Conway.</p>
+        <p>This game became widely known when it was mentioned in an article published by Scientific American in 1970.
+            It consists
+            of a grid of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the
+            initial
+            conditions, the cells form various patterns throughout the course of the game.</p>
+    </div>
 
     <div class="options-modal">
-        <button class="close"><i class="fa-solid fa-xmark fa-2xl"></i></button>
+        <!-- <button class="close"><i class="fa-solid fa-xmark fa-2xl"></i></button> -->
 
         <form type="javascript:">
             <button class="stop-start"><i class="fa-solid fa-pause"></i>Pause</button>
@@ -34,13 +49,7 @@
                         d="M162.389,193.653c-1.065,1.886 -2.377,3.707 -3.935,5.407c-8.877,9.688 -22.364,11.798 -30.1,4.709c-7.737,-7.088 -6.81,-20.708 2.066,-30.396c1.64,-1.789 3.437,-3.32 5.326,-4.582l126.373,-110.976l-99.73,135.838Z"
                         style="fill:#1ae635;"></path>
                 </svg>
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-                    <path
-                        d="M20.35 31.75q1.15 1.15 3.325 1.075 2.175-.075 3.175-1.625l10.8-16.95L20.9 25.2q-1.5 1-1.6 3.2-.1 2.2 1.05 3.35Zm3.55-23.7q2.85 0 5.95.925t5.95 3.175L33.2 14q-2.25-1.5-4.825-2.225-2.575-.725-4.475-.725-7 0-11.95 5Q7 21.05 7 28.2q0 2.25.625 4.55T9.4 37h28.95q1.1-1.8 1.75-4.2.65-2.4.65-4.7 0-2.1-.625-4.525Q39.5 21.15 37.9 19.1l1.95-2.6q1.9 2.8 2.85 5.625.95 2.825 1.05 5.675.1 3-.6 5.65-.7 2.65-2.05 4.9-.6 1.15-1.275 1.4-.675.25-1.675.25H9.6q-.85 0-1.675-.425Q7.1 39.15 6.7 38.35q-1.3-2.4-2-4.875T4 28.2q0-4.15 1.575-7.825t4.275-6.4q2.7-2.725 6.325-4.325t7.725-1.6Zm-.45 16.55Z"
-                        fill="red" />
-                </svg> -->
                 <input type="range" min="1" max="100" value="50" name="speed" id="speed">
-
             </label>
 
             <label class="chance">

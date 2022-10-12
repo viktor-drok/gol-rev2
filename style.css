@@ -38,11 +38,12 @@ div[data-hidden] {
     opacity: 1;
 }
 
-.options {
+.options,
+.explanation {
     position: absolute;
     border: none;
     top: 10vh;
-    width: 6%;
+    width: 12%;
     height: 4vh;
     /* left: calc((100vw - 100vh) / 2 + 100vh); */
     left: calc(50vw + 50vh);
@@ -53,13 +54,24 @@ div[data-hidden] {
     transition: all 0.5s ease;
 }
 
+.explanation {
+    top: 15vh;
+    width: 12%;
+}
+
+.explanation:hover {
+    background-color: cornsilk;
+    width: 16%;
+}
+
 .options:hover {
     /* transition: all 0s; */
     background-color: cornsilk;
-    width: 10%;
+    width: 16%;
 }
 
-.options-modal {
+.options-modal,
+.explanation-modal {
     position: absolute;
     z-index: -5;
     box-sizing: border-box;
