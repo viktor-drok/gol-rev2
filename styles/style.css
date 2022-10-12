@@ -44,7 +44,8 @@ li {
 
 .options,
 .explanation,
-.rules {
+.rules,
+.pattern {
     position: absolute;
     border: none;
     top: 10vh;
@@ -59,18 +60,21 @@ li {
     transition: all 0.5s ease;
 }
 
+.pattern {
+    top: 25vh;
+}
+
 .rules {
     top: 20vh;
-    width: 12%;
 }
 
 .explanation {
     top: 15vh;
-    width: 12%;
 }
 
 .explanation:hover,
 .options:hover,
+.pattern:hover,
 .rules:hover {
     background-color: cornsilk;
     width: 16%;
@@ -78,6 +82,7 @@ li {
 
 .options-modal,
 .explanation-modal,
+.pattern-modal,
 .rules-modal {
     position: absolute;
     z-index: -5;
@@ -99,6 +104,27 @@ li {
 
     transition: all 0.3s ease;
     opacity: 0;
+}
+
+.pattern-modal {
+    width: calc(100vw - (100vw - 100vh));
+    padding: 100px 0;
+}
+
+
+.pattern-modal-list li {
+    text-align: center;
+    margin: 30px 0;
+    display: block;
+    width: calc((100vw - (100vw - 100vh)) / 5)
+}
+
+.pattern-modal-list {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    columns: 3;
 }
 
 .rules-modal {

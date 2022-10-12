@@ -12,12 +12,80 @@ const stopBtn = document.querySelector('.stop-start');
 const options = document.querySelector('.options');
 const explanation = document.querySelector('.explanation');
 const rules = document.querySelector('.rules');
+const pattern = document.querySelector('.pattern');
 const optionsModal = document.querySelector('.options-modal');
 const rulesModal = document.querySelector('.rules-modal');
 const explanationModal = document.querySelector('.explanation-modal');
+const patternModal = document.querySelector('.pattern-modal');
+const patternModalList = document.querySelector('.pattern-modal-list');
 // const closeModalBtn = document.querySelector('.close');
 const buttons = document.querySelectorAll('button');
 const cleaarBtn = document.querySelector('.cleaarBtn');
+
+const patternsStatic = [
+    {
+        name: 'block',
+        src: '/images/block.png'
+    },
+    {
+        name: 'bee-hive',
+        src: '/images/beehive.png'
+    },
+    {
+        name: 'loaf',
+        src: '/images/loaf.png'
+    },
+    {
+        name: 'boat',
+        src: '/images/boat.png'
+    },
+    {
+        name: 'tub',
+        src: '/images/flower.png'
+    }
+];
+
+const patternsOscillators = [
+    {
+        name: 'Blinker',
+        src: '/images/blinker.gif'
+    },
+    {
+        name: 'Toad',
+        src: '/images/toad.gif'
+    },
+    {
+        name: 'Beacon',
+        src: '/images/beacon.gif'
+    },
+    {
+        name: 'Pulsar',
+        src: '/images/pulsar.gif'
+    },
+    {
+        name: 'Penta-decathlon',
+        src: '/images/penta.gif'
+    }
+];
+
+const patternsSpaceships = [
+    {
+        name: 'Glider',
+        src: '/images/glider.gif'
+    },
+    {
+        name: 'Light-weight spaceship',
+        src: '/images/LWSS.gif'
+    },
+    {
+        name: 'Middle-weight spaceship',
+        src: '/images/Mwss.gif'
+    },
+    {
+        name: 'Heavy-weight spaceship',
+        src: '/images/Hwss.gif'
+    }
+];
 
 let timerId;
 
@@ -26,6 +94,8 @@ console.log(state);
 document.body.append(canvas);
 
 preventDefaultBtns();
+
+renderPatterns();
 
 resize();
 render();
@@ -60,6 +130,7 @@ document.addEventListener('keydown', stopStart);
 document.addEventListener('keydown', replaceStartBtnText);
 options.addEventListener('click', showOptionsModal);
 explanation.addEventListener('click', showExplanationModal);
+pattern.addEventListener('click', showPatternModal);
 rules.addEventListener('click', showRulesModal);
 cleaarBtn.addEventListener('click', clearBtn);
 // closeModalBtn.addEventListener('click', () => {
@@ -206,16 +277,26 @@ function showOptionsModal() {
     optionsModal.toggleAttribute('data-hidden');
     explanationModal.removeAttribute('data-hidden');
     rulesModal.removeAttribute('data-hidden');
+    patternModal.removeAttribute('data-hidden');
 }
 
 function showExplanationModal() {
     explanationModal.toggleAttribute('data-hidden');
     optionsModal.removeAttribute('data-hidden');
     rulesModal.removeAttribute('data-hidden');
+    patternModal.removeAttribute('data-hidden');
 }
 
 function showRulesModal() {
     rulesModal.toggleAttribute('data-hidden');
+    explanationModal.removeAttribute('data-hidden');
+    optionsModal.removeAttribute('data-hidden');
+    patternModal.removeAttribute('data-hidden');
+}
+
+function showPatternModal() {
+    patternModal.toggleAttribute('data-hidden');
+    rulesModal.removeAttribute('data-hidden');
     explanationModal.removeAttribute('data-hidden');
     optionsModal.removeAttribute('data-hidden');
 }
@@ -243,3 +324,19 @@ function replaceStartBtnText() {
         ? (stopBtn.innerHTML = '<i class="fa-solid fa-play"></i>Play')
         : (stopBtn.innerHTML = '<i class="fa-solid fa-pause"></i>Pause');
 }
+
+function renderPatterns() {
+
+    patternsStatic.forEach((e) => {
+        patternModalList.innerHTML += `<li ><p>${e.name}</p><img src="${e.src}" alt=""/></li>`;
+    });
+
+    patternsOscillators.forEach((e) => {
+        patternModalList.innerHTML += `<li ><p>${e.name}</p><img src="${e.src}" alt=""/></li>`;
+    });
+
+    patternsSpaceships.forEach((e) => {
+        patternModalList.innerHTML += `<li ><p>${e.name}</p><img src="${e.src}" alt=""/></li>`;
+    });
+}
+
