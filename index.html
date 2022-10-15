@@ -90,8 +90,8 @@
     <div class="options-modal">
         <!-- <button class="close"><i class="fa-solid fa-xmark fa-2xl"></i></button> -->
 
-        <form type="javascript:">
-            <button class="stop-start"><i class="fa-solid fa-pause"></i><span>Pause</span></button>
+        <form action="javascript:">
+            <button class="stop-start"><i class="fa-solid fa-pause"></i>Pause</button>
 
             <label class="speed">
                 <svg width="20" height="20" viewBox="0 0 313 281" xmlns="http://www.w3.org/2000/svg"
@@ -103,14 +103,14 @@
                         d="M162.389,193.653c-1.065,1.886 -2.377,3.707 -3.935,5.407c-8.877,9.688 -22.364,11.798 -30.1,4.709c-7.737,-7.088 -6.81,-20.708 2.066,-30.396c1.64,-1.789 3.437,-3.32 5.326,-4.582l126.373,-110.976l-99.73,135.838Z"
                         style="fill:#1ae635;"></path>
                 </svg>
-                <input type="range" min="1" max="100" value="50" name="speed" id="speed">
+                <input id="speed" type="range" min="1" max="100" value="50" name="speed">
             </label>
 
             <label class="chance">
                 <span><b>Probability of new neighbor appearance</b></span>
                 <img
                     src="https://img.icons8.com/external-outline-black-m-oki-orlando/24/000000/external-probability-charts-and-diagrams-outline-black-m-oki-orlando.png" />
-                <input type="range" min="0" max="100" value="5" name="chance" id="chance">
+                <input id="chance" type="range" min="0" max="100" value="0" name="chance">
             </label>
 
             <button class="cleaarBtn"><i class="fa-solid fa-stop"></i><span>Clear</span></button>

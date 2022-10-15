@@ -2,8 +2,8 @@ const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 
 const color = 'cornsilk';
-const rowCount = 40;
-const colCount = 40;
+const rowCount = 120;
+const colCount = 120;
 let cellSize = 0;
 let stepsPerSecond = document.getElementById('speed');
 let chanceForNewNeighbor = document.getElementById('chance');
@@ -18,75 +18,153 @@ const rulesModal = document.querySelector('.rules-modal');
 const explanationModal = document.querySelector('.explanation-modal');
 const patternModal = document.querySelector('.pattern-modal');
 const patternModalList = document.querySelector('.pattern-modal-list');
-// const closeModalBtn = document.querySelector('.close');
 const buttons = document.querySelectorAll('button');
 const cleaarBtn = document.querySelector('.cleaarBtn');
-const generation = document.querySelector('.generation');
-const population = document.querySelector('.population');
+const generationOutput = document.querySelector('.generation');
+let generation = 0;
+const populationOutput = document.querySelector('.population');
 let populationCount = [];
 
-const patternsStatic = [
+const patterns = [
     {
         name: 'block',
-        src: '/images/block.png'
+        src: '/images/block.png',
+        state: [
+            [1, 1],
+            [1, 1],
+        ]
     },
     {
         name: 'bee-hive',
-        src: '/images/beehive.png'
+        src: '/images/beehive.png',
+        state: [
+            [0, 1, 1, 0],
+            [1, 0, 0, 1],
+            [1, 0, 0, 1],
+            [0, 1, 1, 0],
+        ]
     },
     {
         name: 'loaf',
-        src: '/images/loaf.png'
+        src: '/images/loaf.png',
+        state: [
+            [0, 1, 1, 0],
+            [1, 0, 0, 1],
+            [0, 1, 0, 1],
+            [0, 0, 1, 0],
+        ]
     },
     {
         name: 'boat',
-        src: '/images/boat.png'
+        src: '/images/boat.png',
+        state: [
+            [1, 1, 0],
+            [1, 0, 1],
+            [0, 1, 0]
+        ]
     },
     {
         name: 'tub',
-        src: '/images/flower.png'
-    }
-];
-
-const patternsOscillators = [
+        src: '/images/flower.png',
+        state: [
+            [0, 1, 0],
+            [1, 0, 1],
+            [0, 1, 0]
+        ]
+    },
     {
         name: 'Blinker',
-        src: '/images/blinker.gif'
+        src: '/images/blinker.gif',
+        state: [
+            [1, 1, 1]
+        ]
     },
     {
         name: 'Toad',
-        src: '/images/toad.gif'
+        src: '/images/toad.gif',
+        state: [
+            [0, 1, 1, 1],
+            [1, 1, 1, 0]
+        ]
     },
     {
         name: 'Beacon',
-        src: '/images/beacon.gif'
+        src: '/images/beacon.gif',
+        state: [
+            [1, 1, 0, 0],
+            [1, 1, 0, 0],
+            [0, 0, 1, 1],
+            [0, 0, 1, 1],
+        ]
     },
     {
         name: 'Pulsar',
-        src: '/images/pulsar.gif'
+        src: '/images/pulsar.gif',
+        state: [
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0]
+        ]
     },
     {
         name: 'Penta-decathlon',
-        src: '/images/penta.gif'
-    }
-];
-
-const patternsSpaceships = [
+        src: '/images/penta.gif',
+        state: [
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+            [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+        ]
+    },
     {
         name: 'Heavy-weight spaceship',
-        src: '/images/Hwss.gif'
+        src: '/images/Hwss.gif',
+        state: [
+            [0, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+        ]
     },
     {
         name: 'Glider',
-        src: '/images/glider.gif'
+        src: '/images/glider.gif',
+        state: [
+            [1, 0, 0],
+            [0, 1, 1],
+            [1, 1, 0],
+        ]
     },
     {
         name: 'Light-weight spaceship',
-        src: '/images/LWSS.gif'
+        src: '/images/LWSS.gif',
+        state: [
+            [0, 1, 1, 0, 0],
+            [1, 1, 1, 1, 0],
+            [1, 1, 0, 1, 1],
+            [0, 0, 1, 1, 0]
+        ]
     },
     {
         name: 'Middle-weight spaceship',
-        src: '/images/Mwss.gif'
+        src: '/images/Mwss.gif',
+        state: [
+            [0, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0],
+            [0, 0, 1, 0, 0, 0],
+        ]
     }
 ];
 
@@ -95,8 +173,6 @@ let timerId;
 console.log(state);
 
 document.body.append(canvas);
-
-preventDefaultBtns();
 
 renderPatterns();
 
@@ -119,7 +195,9 @@ canvas.onclick = e => {
 };
 
 function stopStart(e) {
-    if (e.key === ' ' || e.target == stopBtn) {
+    if ((e.key === ' ') + (e.target == stopBtn) == 1) {
+        replaceStartBtnText();
+
         if (timerId) {
             stopSimulation();
         } else {
@@ -129,37 +207,30 @@ function stopStart(e) {
 }
 
 stopBtn.addEventListener('click', stopStart);
-stopBtn.addEventListener('click', replaceStartBtnText);
 document.addEventListener('keydown', stopStart);
-document.addEventListener('keydown', replaceStartBtnText);
 options.addEventListener('click', showOptionsModal);
 explanation.addEventListener('click', showExplanationModal);
 pattern.addEventListener('click', showPatternModal);
 rules.addEventListener('click', showRulesModal);
 cleaarBtn.addEventListener('click', clearBtn);
-// closeModalBtn.addEventListener('click', () => {
-//     optionsModal.removeAttribute('data-hidden');
-// });
+patternModalList.addEventListener('click', (e) => {
+    clearBtn();
 
-// onkeydown = (e) => {
-//     if (e.key === ' ') {
-//         if (timerId) {
-//             stopSimulation();
-//         } else {
-//             runSimulation();
-//         }
-//     }
-// };
+    const li = e.target.closest('li');
+    if (!li) return;
+    const img = li.querySelector('img');
+    const pattern = patterns.find(p => img.src.endsWith(p.src));
 
-// onclick = (e) => {
-//     if (e.target == stopBtn) {
-//         if (timerId) {
-//             stopSimulation();
-//         } else {
-//             runSimulation();
-//         }
-//     }
-// };
+    for (let l = 0; l < pattern.state.length; l++) {
+        for (let k = 0; k < pattern.state[l].length; k++) {
+            state[l + Math.floor(state.length / 2)][k + Math.floor(state.length / 2)] = pattern.state[l][k];
+            console.log(state[l][k]);
+        }
+    }
+
+    render();
+    stopSimulation();
+});
 
 function resize() {
     const viewMin = Math.min(innerWidth, innerHeight);
@@ -200,21 +271,14 @@ function toggleCell(x, y) {
     row[cellIndex] = +!row[cellIndex];
 }
 
-// function runSimulation() {
-//     timerId = setInterval(() => {
-//         proceed();
-//         render();
-//     }, 1000 / stepsPerSecond);
-// }
-
 function runSimulation() {
     timerId = setTimeout(() => {
         proceed();
         render();
-        showGeneration(timerId);
+        showGeneration();
         showPopulation(state);
         runSimulation();
-    }, 1000 / (stepsPerSecond.value / 10));
+    }, 1000 / (stepsPerSecond.value / 2));
 }
 
 function proceed() {
@@ -233,6 +297,7 @@ function proceed() {
     }
 
     state.splice(0, rowCount, ...nextState);
+    generation++;
 }
 
 function getNeighbourhood(rowIndex, colIndex) {
@@ -261,16 +326,6 @@ function calcNextCellState(neighborhood) {
         ? +(neighbourCount === 2 || neighbourCount === 3)
         : +(neighbourCount === 3 || neighbourCount === 2 && Math.random() < chanceForNewNeighbor.value / 100);
 }
-// function calcNextCellState(neighbourhood) {
-//     neighbourhood = neighbourhood.flat();
-
-//     const [cellState] = neighbourhood.splice(4, 1);
-//     const neighbourCount = neighbourhood.filter(Boolean).length;
-
-//     return cellState
-//         ? +(neighbourCount === 2 || neighbourCount === 3)
-//         : +(neighbourCount === 3);
-// }
 
 function stopSimulation() {
     clearInterval(timerId);
@@ -307,10 +362,6 @@ function showPatternModal() {
     optionsModal.removeAttribute('data-hidden');
 }
 
-function preventDefaultBtns() {
-    buttons.forEach(element => element.addEventListener('click', (e) => e.preventDefault()));
-};
-
 function clearBtn() {
     stopSimulation();
     clearCanvas();
@@ -333,25 +384,17 @@ function replaceStartBtnText() {
 
 function renderPatterns() {
 
-    patternsStatic.forEach((e) => {
-        patternModalList.innerHTML += `<li ><p>${e.name}</p><img src="${e.src}" alt=""/></li>`;
-    });
-
-    patternsOscillators.forEach((e) => {
-        patternModalList.innerHTML += `<li ><p>${e.name}</p><img src="${e.src}" alt=""/></li>`;
-    });
-
-    patternsSpaceships.forEach((e) => {
-        patternModalList.innerHTML += `<li ><p>${e.name}</p><img src="${e.src}" alt=""/></li>`;
+    patterns.forEach((pattern) => {
+        patternModalList.innerHTML += `<li ><p>${pattern.name}</p><img src="${pattern.src}" alt=""/></li>`;
     });
 }
 
-function showGeneration(timerId) {
-    generation.innerText = `Generation: ${timerId}`;
+function showGeneration() {
+    generationOutput.innerText = `Generation: ${generation}`;
 }
 
 function showPopulation(state) {
     populationCount = state.flat().reduce((a, b) => a + b);
 
-    population.innerText = `Population: ${populationCount}`;
+    populationOutput.innerText = `Population: ${populationCount}`;
 }

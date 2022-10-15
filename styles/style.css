@@ -29,7 +29,7 @@ button {
 }
 
 form > button:active {
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
     transform: scale(0.9);
 }
 
@@ -58,6 +58,7 @@ form p {
 }
 
 form > button > i {
+    pointer-events: none;
     font-size: 20px;
     color: rgb(34, 61, 238);
 }
