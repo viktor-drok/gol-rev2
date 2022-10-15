@@ -170,8 +170,6 @@ const patterns = [
 
 let timerId;
 
-console.log(state);
-
 document.body.append(canvas);
 
 renderPatterns();
@@ -224,7 +222,6 @@ patternModalList.addEventListener('click', (e) => {
     for (let l = 0; l < pattern.state.length; l++) {
         for (let k = 0; k < pattern.state[l].length; k++) {
             state[l + Math.floor(state.length / 2)][k + Math.floor(state.length / 2)] = pattern.state[l][k];
-            console.log(state[l][k]);
         }
     }
 
