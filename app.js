@@ -28,7 +28,7 @@ let populationCount = [];
 const patterns = [
     {
         name: 'block',
-        src: '/images/block.png',
+        src: './images/block.png',
         state: [
             [1, 1],
             [1, 1],
@@ -36,7 +36,7 @@ const patterns = [
     },
     {
         name: 'bee-hive',
-        src: '/images/beehive.png',
+        src: './images/beehive.png',
         state: [
             [0, 1, 1, 0],
             [1, 0, 0, 1],
@@ -46,7 +46,7 @@ const patterns = [
     },
     {
         name: 'loaf',
-        src: '/images/loaf.png',
+        src: './images/loaf.png',
         state: [
             [0, 1, 1, 0],
             [1, 0, 0, 1],
@@ -56,7 +56,7 @@ const patterns = [
     },
     {
         name: 'boat',
-        src: '/images/boat.png',
+        src: './images/boat.png',
         state: [
             [1, 1, 0],
             [1, 0, 1],
@@ -65,7 +65,7 @@ const patterns = [
     },
     {
         name: 'tub',
-        src: '/images/flower.png',
+        src: './images/flower.png',
         state: [
             [0, 1, 0],
             [1, 0, 1],
@@ -74,14 +74,14 @@ const patterns = [
     },
     {
         name: 'Blinker',
-        src: '/images/blinker.gif',
+        src: './images/blinker.gif',
         state: [
             [1, 1, 1]
         ]
     },
     {
         name: 'Toad',
-        src: '/images/toad.gif',
+        src: './images/toad.gif',
         state: [
             [0, 1, 1, 1],
             [1, 1, 1, 0]
@@ -89,7 +89,7 @@ const patterns = [
     },
     {
         name: 'Beacon',
-        src: '/images/beacon.gif',
+        src: './images/beacon.gif',
         state: [
             [1, 1, 0, 0],
             [1, 1, 0, 0],
@@ -99,7 +99,7 @@ const patterns = [
     },
     {
         name: 'Pulsar',
-        src: '/images/pulsar.gif',
+        src: './images/pulsar.gif',
         state: [
             [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -118,7 +118,7 @@ const patterns = [
     },
     {
         name: 'Penta-decathlon',
-        src: '/images/penta.gif',
+        src: './images/penta.gif',
         state: [
             [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
             [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
@@ -127,7 +127,7 @@ const patterns = [
     },
     {
         name: 'Heavy-weight spaceship',
-        src: '/images/Hwss.gif',
+        src: './images/Hwss.gif',
         state: [
             [0, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 1],
@@ -138,7 +138,7 @@ const patterns = [
     },
     {
         name: 'Glider',
-        src: '/images/glider.gif',
+        src: './images/glider.gif',
         state: [
             [1, 0, 0],
             [0, 1, 1],
@@ -147,7 +147,7 @@ const patterns = [
     },
     {
         name: 'Light-weight spaceship',
-        src: '/images/LWSS.gif',
+        src: './images/LWSS.gif',
         state: [
             [0, 1, 1, 0, 0],
             [1, 1, 1, 1, 0],
@@ -157,7 +157,7 @@ const patterns = [
     },
     {
         name: 'Middle-weight spaceship',
-        src: '/images/Mwss.gif',
+        src: './images/Mwss.gif',
         state: [
             [0, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 1],
