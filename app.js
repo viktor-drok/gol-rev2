@@ -179,7 +179,6 @@ render();
 
 runSimulation();
 
-
 onresize = () => {
     resize();
     render();
@@ -256,7 +255,6 @@ function render() {
 }
 
 function clear() {
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#333e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -285,9 +283,9 @@ function proceed() {
         const row = [];
 
         for (let j = 0; j < colCount; j++) {
-            const neighbourhood = getNeighbourhood(i, j);
+            const neighborhood = getNeighborhood(i, j);
 
-            row.push(calcNextCellState(neighbourhood));
+            row.push(calcNextCellState(neighborhood));
         }
 
         nextState.push(row);
@@ -297,8 +295,8 @@ function proceed() {
     generation++;
 }
 
-function getNeighbourhood(rowIndex, colIndex) {
-    const neighbourhood = [];
+function getNeighborhood(rowIndex, colIndex) {
+    const neighborhood = [];
 
     for (let i = -1; i < 2; i++) {
         const row = [];
@@ -307,21 +305,21 @@ function getNeighbourhood(rowIndex, colIndex) {
             row.push(state.at((rowIndex + i) % rowCount).at((colIndex + j) % colCount));
         }
 
-        neighbourhood.push(row);
+        neighborhood.push(row);
     }
 
-    return neighbourhood;
+    return neighborhood;
 }
 
 function calcNextCellState(neighborhood) {
     neighborhood = neighborhood.flat();
 
     const [cellState] = neighborhood.splice(4, 1);
-    const neighbourCount = neighborhood.filter(Boolean).length;
+    const neighborCount = neighborhood.filter(Boolean).length;
 
     return cellState
-        ? +(neighbourCount === 2 || neighbourCount === 3)
-        : +(neighbourCount === 3 || neighbourCount === 2 && Math.random() < chanceForNewNeighbor.value / 100);
+        ? +(neighborCount === 2 || neighborCount === 3)
+        : +(neighborCount === 3 || neighborCount === 2 && Math.random() < chanceForNewNeighbor.value / 100);
 }
 
 function stopSimulation() {
